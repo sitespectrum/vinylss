@@ -1,0 +1,32 @@
+# Usage (from backend/):
+#   cp .env.example .env   # fill in the values
+#   docker compose up -d --build
+services:
+  api:
+    build: .
+    image: vinylss-api
+    restart: unless-stopped
+    ports:
+      # Spotify only accepts a loopback IP redirect URI, so publish on 127.0.0.1:5080
+      # (the same address `dotnet run` uses). The Android emulator reaches it via 10.0.2.2:5080.
+      - "127.0.0.1:${API_PORT:-5080}:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      Spotify__ClientId: ${SPOTIFY_CLIENT_ID:?set SPOTIFY_CLIENT_ID in .env}
+      Spotify__ClientSecret: ${SPOTIFY_CLIENT_SECRET:?set SPOTIFY_CLIENT_SECRET in .env}
+      Spotify__RedirectUri: ${SPOTIFY_REDIRECT_URI:-http://127.0.0.1:5080/auth/callback}
+      Discogs__Token: ${DISCOGS_TOKEN:-}
+      # Required outside Development (min. 32 chars): openssl rand -base64 48
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:?set JWT_SIGNING_KEY in .env}
+    volumes:
+      - vinylss-data:/data
+    healthcheck:
+      # The aspnet image has no curl/wget; use bash's /dev/tcp.
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080 && printf 'GET /health HTTP/1.0\\r\\n\\r\\n' >&3 && grep -q ' 200 ' <&3"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+volumes:
+  vinylss-data:

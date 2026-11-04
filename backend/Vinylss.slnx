@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Vinylss.Api/Vinylss.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Vinylss.Api.Tests/Vinylss.Api.Tests.csproj" />
+  </Folder>
+</Solution>

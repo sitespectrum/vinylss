@@ -1,0 +1,11 @@
+# .NET
+backend/**/bin/
+backend/**/obj/
+*.db
+*.db-shm
+*.db-wal
+.vs/
+*.user
+
+# Docker
+backend/.env
