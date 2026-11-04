@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+<defs>
+  <radialGradient id="label" gradientUnits="userSpaceOnUse" cx="32.0" cy="32.0" r="10.21"><stop offset="0" stop-color="#F2A03D"/><stop offset="1" stop-color="#D9822B"/></radialGradient>
+  <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A1A1A"/><stop offset="1" stop-color="#0E0E0E"/></linearGradient>
+  <linearGradient id="sheen-62" gradientUnits="userSpaceOnUse" x1="54.81" y1="28.20" x2="35.80" y2="9.19"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+  <linearGradient id="sheen118" gradientUnits="userSpaceOnUse" x1="9.19" y1="35.80" x2="28.20" y2="54.81"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+</defs>
+  <rect width="64" height="64" rx="14.08" fill="url(#tile)"/>
+  <circle cx="32.0" cy="32.0" r="26.88" fill="#111111"/>
+  <circle cx="32.0" cy="32.0" r="16.67" fill="none" stroke="#000000" stroke-width="0.81"/>
+  <circle cx="32.0" cy="32.0" r="21.50" fill="none" stroke="#000000" stroke-width="0.81"/>
+  <path d="M37.05,22.51 L44.24,8.98 A26.07,26.07 0 0 1 55.02,19.76 L41.49,26.95 A10.75,10.75 0 0 0 37.05,22.51 Z" fill="url(#sheen-62)"/>
+  <path d="M26.95,41.49 L19.76,55.02 A26.07,26.07 0 0 1 8.98,44.24 L22.51,37.05 A10.75,10.75 0 0 0 26.95,41.49 Z" fill="url(#sheen118)"/>
+  <circle cx="32.0" cy="32.0" r="26.72" fill="none" stroke="#444444" stroke-width="0.32"/>
+  <circle cx="32.0" cy="32.0" r="10.21" fill="url(#label)"/>
+  <circle cx="32.0" cy="32.0" r="10.21" fill="none" stroke="#000000" stroke-opacity="0.35" stroke-width="0.40"/>
+  <path d="M26.48,27.71 L32.00,37.72 L37.52,27.71" fill="none" stroke="#1A1206" stroke-width="1.84" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32.0" cy="32.0" r="1.00" fill="#0E0E0E"/>
+</svg>

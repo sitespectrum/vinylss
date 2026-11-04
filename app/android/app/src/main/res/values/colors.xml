@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Palette.background in lib/ui/theme.dart. -->
+    <color name="brand_background">#0E0E0E</color>
+</resources>

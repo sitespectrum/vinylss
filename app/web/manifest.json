@@ -1,11 +1,11 @@
 {
-    "name": "vinylss",
-    "short_name": "vinylss",
+    "name": "Vinylss",
+    "short_name": "Vinylss",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0E0E0E",
+    "theme_color": "#0E0E0E",
+    "description": "Vinyl recommendations based on your Spotify listening.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<defs>
+  <radialGradient id="label" gradientUnits="userSpaceOnUse" cx="512.0" cy="512.0" r="140.08"><stop offset="0" stop-color="#F2A03D"/><stop offset="1" stop-color="#D9822B"/></radialGradient>
+  <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A1A1A"/><stop offset="1" stop-color="#0E0E0E"/></linearGradient>
+  <linearGradient id="sheen-62" gradientUnits="userSpaceOnUse" x1="824.80" y1="459.87" x2="564.13" y2="199.20"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+  <linearGradient id="sheen118" gradientUnits="userSpaceOnUse" x1="199.20" y1="564.13" x2="459.87" y2="824.80"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.16"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+</defs>
+  <rect width="1024" height="1024" fill="#0E0E0E"/>
+  <circle cx="512.0" cy="512.0" r="368.64" fill="#111111"/>
+  <circle cx="512.0" cy="512.0" r="154.83" fill="none" stroke="#1C1C1C" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="165.89" fill="none" stroke="#151515" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="176.95" fill="none" stroke="#1C1C1C" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="188.01" fill="none" stroke="#151515" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="199.07" fill="none" stroke="#1C1C1C" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="210.12" fill="none" stroke="#151515" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="221.18" fill="none" stroke="#000000" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="232.24" fill="none" stroke="#000000" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="243.30" fill="none" stroke="#1C1C1C" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="254.36" fill="none" stroke="#151515" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="265.42" fill="none" stroke="#1C1C1C" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="276.48" fill="none" stroke="#151515" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="287.54" fill="none" stroke="#1C1C1C" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="298.60" fill="none" stroke="#000000" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="309.66" fill="none" stroke="#1C1C1C" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="320.72" fill="none" stroke="#151515" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="331.78" fill="none" stroke="#1C1C1C" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="342.84" fill="none" stroke="#151515" stroke-width="4.42"/>
+  <path d="M581.23,381.80 L679.87,196.27 A357.58,357.58 0 0 1 827.73,344.13 L642.20,442.77 A147.46,147.46 0 0 0 581.23,381.80 Z" fill="url(#sheen-62)"/>
+  <path d="M442.77,642.20 L344.13,827.73 A357.58,357.58 0 0 1 196.27,679.87 L381.80,581.23 A147.46,147.46 0 0 0 442.77,642.20 Z" fill="url(#sheen118)"/>
+  <circle cx="512.0" cy="512.0" r="366.43" fill="none" stroke="#444444" stroke-width="4.42"/>
+  <circle cx="512.0" cy="512.0" r="140.08" fill="url(#label)"/>
+  <circle cx="512.0" cy="512.0" r="140.08" fill="none" stroke="#000000" stroke-opacity="0.35" stroke-width="5.53"/>
+  <path d="M436.36,453.17 L512.00,590.45 L587.64,453.17" fill="none" stroke="#1A1206" stroke-width="25.21" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="512.0" cy="512.0" r="13.27" fill="#0E0E0E"/>
+</svg>

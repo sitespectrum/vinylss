@@ -9,8 +9,8 @@ import 'features/recommendations/recommendations_screen.dart';
 import 'features/recommendations/section_screen.dart';
 import 'features/settings/settings_screen.dart';
 import 'features/shell/app_shell.dart';
+import 'ui/brand.dart';
 import 'ui/theme.dart';
-import 'ui/vinyl.dart';
 
 void main() => runApp(const ProviderScope(child: VinylssApp()));
 
@@ -26,7 +26,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       final auth = authChanges.value;
       final atLogin = state.matchedLocation == '/login';
       if (auth.isLoggedIn) return atLogin ? '/' : null;
-      // Restoring the saved token or mid-login: stay put ('/' shows a spinner).
+      // Restoring the saved token or mid-login: stay put ('/' shows the splash).
       if (auth.loading) return null;
       return atLogin ? null : '/login';
     },
@@ -37,7 +37,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, _, shell) => Consumer(
           builder: (context, ref, _) => ref.watch(authProvider).isLoggedIn
               ? AppShell(shell: shell)
-              : const Scaffold(body: LoadingRecord()),
+              : const Scaffold(body: BrandSplash()),
         ),
         branches: [
           StatefulShellBranch(routes: [
