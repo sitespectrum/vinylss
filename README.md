@@ -58,6 +58,19 @@ The container runs in Production mode, so `JWT_SIGNING_KEY` is required. The SQL
 kept in the `vinylss-data` volume. Run `docker compose down -v` to wipe it, for example after a
 schema change.
 
+**Cloudflare Tunnel** (optional, the `tunnel` profile): exposes the API on a public hostname
+without opening ports.
+
+1. In the Cloudflare dashboard (Zero Trust → Networks → Tunnels), create a tunnel of type
+   *Cloudflared* and copy its token into `CLOUDFLARE_TUNNEL_TOKEN`.
+2. Add a public hostname (e.g. `vinylss.example.com`) with service `http://api:8080`.
+3. Set `SPOTIFY_REDIRECT_URI=https://vinylss.example.com/auth/callback` and add that URI to the
+   Spotify app.
+4. Build the app with `--dart-define=API_BASE_URL=https://vinylss.example.com`.
+
+`COMPOSE_PROFILES=tunnel` in `.env` starts the tunnel with `docker compose up`. Remove it to run
+locally only.
+
 ### How a refresh works
 
 `POST /recommendations/refresh` queues a background job. The job does the following:

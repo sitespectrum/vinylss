@@ -28,5 +28,20 @@ services:
       start_period: 10s
       retries: 3
 
+  # Cloudflare Tunnel (enabled with COMPOSE_PROFILES=tunnel). Create the tunnel in the
+  # Cloudflare dashboard (Zero Trust → Networks → Tunnels) and point its public hostname
+  # at http://api:8080.
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    profiles: [tunnel]
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      # Not `:?`: Compose would then require it even with the profile disabled.
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+    depends_on:
+      api:
+        condition: service_healthy
+
 volumes:
   vinylss-data:
