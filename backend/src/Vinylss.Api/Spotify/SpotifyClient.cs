@@ -10,8 +10,11 @@ public sealed class SpotifyApiException(HttpStatusCode status, string message) :
 }
 
 /// <summary>Thin client for the Spotify Web API. Every call takes the user's access token.</summary>
-public sealed partial class SpotifyClient(HttpClient http, ILogger<SpotifyClient> log)
+public sealed partial class SpotifyClient(HttpClient http, SpotifyRateLimiter limiter, ILogger<SpotifyClient> log)
 {
+    /// <summary>Longest Spotify-imposed pause a request will sit out; anything longer fails the call.</summary>
+    public static readonly TimeSpan MaxRateLimitWait = TimeSpan.FromMinutes(2);
+
     public static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web)
     {
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
@@ -40,7 +43,7 @@ public sealed partial class SpotifyClient(HttpClient http, ILogger<SpotifyClient
 
     public Task<List<SpotifyAlbum>> GetArtistAlbumsAsync(string token, string artistId, int max, CancellationToken ct) =>
         GetPagesAsync<SpotifyAlbum>(token,
-            $"artists/{Uri.EscapeDataString(artistId)}/albums?include_groups=album,single,compilation&limit=50", max, ct);
+            $"artists/{Uri.EscapeDataString(artistId)}/albums?include_groups=album,single,compilation&limit={FallbackLimit}", max, ct);
 
     /// <summary>Gets an album including its full tracklist (following track pagination).</summary>
     public async Task<SpotifyAlbum?> GetAlbumAsync(string token, string albumId, CancellationToken ct)
@@ -83,17 +86,20 @@ public sealed partial class SpotifyClient(HttpClient http, ILogger<SpotifyClient
     {
         for (var attempt = 0; ; attempt++)
         {
+            await limiter.WaitAsync(MaxRateLimitWait, ct);
+
             using var req = new HttpRequestMessage(HttpMethod.Get, url);
             req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             using var res = await http.SendAsync(req, ct);
 
-            if (res.StatusCode == HttpStatusCode.TooManyRequests && attempt < 5)
+            if (res.StatusCode == HttpStatusCode.TooManyRequests)
             {
-                var wait = res.Headers.RetryAfter?.Delta ?? TimeSpan.FromSeconds(2 << attempt);
-                if (wait > TimeSpan.FromMinutes(2))
-                    throw new SpotifyApiException(res.StatusCode, $"Spotify rate limit: retry after {wait}");
-                log.LogInformation("Spotify rate limited, waiting {Wait}", wait);
-                await Task.Delay(wait, ct);
+                // Block every caller, not just this one, so concurrent requests stop too.
+                var wait = res.Headers.RetryAfter?.Delta ?? TimeSpan.FromSeconds(5 << attempt);
+                limiter.Block(wait);
+                log.LogWarning("Spotify rate limited on {Url}, backing off for {Wait}", url, wait);
+                if (attempt >= 3 || wait > MaxRateLimitWait)
+                    throw new SpotifyRateLimitedException(limiter.BlockedUntil);
                 continue;
             }
 

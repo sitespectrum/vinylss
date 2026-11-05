@@ -91,6 +91,8 @@ class AuthController extends Notifier<AuthState> {
         'access_denied' => 'Spotify access was denied.',
         'spotify_forbidden' =>
           'Spotify refused access. While the Spotify app is in development mode, your account must be added to its user list.',
+        'spotify_rate_limited' =>
+          'Spotify is temporarily rate limiting this server. Please try again later.',
         _ => 'Spotify login failed ($code).',
       };
 }

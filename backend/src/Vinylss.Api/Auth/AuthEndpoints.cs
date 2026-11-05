@@ -74,12 +74,15 @@ public static class AuthEndpoints
                 user.SpotifyTokenExpiresAt = DateTime.UtcNow.AddSeconds(tokens.ExpiresIn);
                 await db.SaveChangesAsync(ct);
             }
-            catch (Exception ex) when (ex is SpotifyApiException or SpotifyAuthExpiredException)
+            catch (Exception ex) when (ex is SpotifyApiException or SpotifyAuthExpiredException or SpotifyRateLimitedException)
             {
                 log.LogWarning(ex, "Spotify login failed");
-                var reason = ex is SpotifyApiException { Status: System.Net.HttpStatusCode.Forbidden }
-                    ? "spotify_forbidden"
-                    : "spotify_login_failed";
+                var reason = ex switch
+                {
+                    SpotifyApiException { Status: System.Net.HttpStatusCode.Forbidden } => "spotify_forbidden",
+                    SpotifyRateLimitedException => "spotify_rate_limited",
+                    _ => "spotify_login_failed",
+                };
                 return Results.Redirect(QueryHelpers.AddQueryString(returnUrl, "error", reason));
             }
 

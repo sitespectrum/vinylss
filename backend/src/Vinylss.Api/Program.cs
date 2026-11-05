@@ -36,6 +36,8 @@ builder.Services.AddDbContextFactory<AppDbContext>(o =>
 builder.Services.AddScoped(sp => sp.GetRequiredService<IDbContextFactory<AppDbContext>>().CreateDbContext());
 builder.Services.AddMemoryCache();
 
+builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<SpotifyRateLimiter>();
 builder.Services.AddHttpClient<SpotifyClient>(c => c.BaseAddress = new Uri("https://api.spotify.com/v1/"));
 builder.Services.AddHttpClient<SpotifyAccountsClient>(c => c.BaseAddress = new Uri("https://accounts.spotify.com/"));
 builder.Services.AddHttpClient<DiscogsClient>(c => c.BaseAddress = new Uri("https://api.discogs.com/"));
